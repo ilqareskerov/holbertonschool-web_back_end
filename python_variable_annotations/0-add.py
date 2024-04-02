@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""
-    Module with typing Python
-"""
+"""type-annotated function add that takes a float a
+and a float bas arguments and returns their sum as a float"""
+
 
 def add(a: float, b: float) -> float:
-    """Returns the sum of two floating-point numbers."""
-    return a + b
+    """add function"""
+    return a+b
