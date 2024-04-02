@@ -4,5 +4,5 @@ that takes a string str1 and a string str2 as arguments and returns a concatenat
 
 
 def concat(st1: str, st2: str) -> str:
-    """"that takes a string str1 and a string str2 as arguments and returns a concatenated string"""
+    """concat function"""
     return st1+st2
