@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
-""""
-a type-annotated function floor which takes a float n as argument and returns the floor of the float."""
+"""annotated function floor which takes a float n as argument
+and returns the floor of the float."""
 
-def floor(n:float)->int: 
-    """Returns the largest integer less than or"""
-    if n < 0:
+
+def floor(n: float) -> int:
+    """floor function"""
+    if (n > 0 and isinstance(n, int)):
+        return n
+    elif (n > 0 and isinstance(n, float)):
+        return int(n)
+    elif (n < 0 and isinstance(n, int)):
+        return n
+    elif (n < 0 and isinstance(n, float)):
         return int(n)-1
-    return int(n)
+    
