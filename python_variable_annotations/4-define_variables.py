@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 '''
-Write a type-annotated function to_str
-that takes a float n as argument and returns
-the string representation of the float.
+Define and annotate the following variables with the specified values
 '''
 
 
-def to_str(n: float) -> str:
-    """the string representation of the float"""
-    return str(n)
+a: int = 1
+pi: float = 3.14
+i_understand_annotations: bool = True
+school: str = "Holberton"
