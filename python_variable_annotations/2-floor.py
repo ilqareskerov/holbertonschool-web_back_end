@@ -13,3 +13,4 @@ def floor(n: float) -> int:
         return n
     elif (n < 0 and isinstance(n, float)):
         return int(n)-1
+
