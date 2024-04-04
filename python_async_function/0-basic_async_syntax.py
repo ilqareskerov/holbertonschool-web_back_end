@@ -7,6 +7,8 @@ import random
 
 
 async def wait_random(max_delay: int = 10) -> float:
-    delay = random.uniform(0, max_delay)
+    """Use the random module"""
+    delay = max_delay * random.random()
     await asyncio.sleep(delay)
-    return delay
+    return (delay)
+
