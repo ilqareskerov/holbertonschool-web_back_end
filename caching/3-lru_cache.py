@@ -1,25 +1,30 @@
-#!/usr/bin/python3
-""" FIFO caching """
+#!/usr/bin/env python3
+""" Basic cache Basic cache Basic cache Basic cache
+"""
+
 from base_caching import BaseCaching
 
 
 class LRUCache(BaseCaching):
-    def __init__(self):
-        super().__init__()
+    """ LRU cache class
+    """
 
     def put(self, key, item):
+        """ Add an item in the cache
+            and remove first if more than max items
+        """
         if key and item:
-            if key in self.cache_data:
-                self.cache_data.pop(key)
-            elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                discard = next(iter(self.cache_data))
-                print("DISCARD: {}".format(discard))
-                self.cache_data.pop(discard)
             self.cache_data[key] = item
+            if self.cache_data.__len__() > BaseCaching.MAX_ITEMS:
+                first = next(iter(self.cache_data))
+                print("DISCARD:", first)
+                self.cache_data.pop(first)
 
     def get(self, key):
-        if key is None or self.cache_data.get(key) is None:
-            return None
-        value = self.cache_data.pop(key)
-        self.cache_data[key] = value
-        return value
+        """ Get an item by key
+        """
+        if key in self.cache_data:
+            value = self.cache_data[key]
+            self.cache_data.pop(key)
+            self.cache_data[key] = value
+            return value
