@@ -10,6 +10,6 @@ from typing import List
 import re
 
 
-def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
+def filter_datum(fields: List[str], redaction: str, message: str, separator: str):
     """returns the log message obfuscated"""
     return re.sub(r'(?<={}=).*?(?={})'.format(fields[0], separator), redaction, message)
