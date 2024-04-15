@@ -6,10 +6,9 @@ message: a string representing the log line
 separator: a string representing by which character is separating all fields in the log line (message)"""
 
 from typing import List
+import re
 
 
 def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
     """returns the log message obfuscated"""
-    for field in fields:
-        message = message.replace(field + separator, redaction + separator)
-    return message
+    return re.sub(r'(?<=^|{})[^{}]+(?={})'.format(separator, separator, separator), redaction, message)
