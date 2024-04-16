@@ -45,7 +45,7 @@ manage the API authentification
         if request is None:
             return None
 
-        s_name = os.getenv('SESSION_NAME', '_my_session_id')
+        s_name = os.getenv("SESSION_NAME")
         s_id = request.cookies.get(s_name)
 
         return s_id
