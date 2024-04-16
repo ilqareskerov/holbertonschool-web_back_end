@@ -2,15 +2,18 @@
 """
 for now this module do nothing
 """
+from api.v1.views.users import create_user
 from api.v1.auth.auth import Auth
 import uuid
 from models.user import User
-from typing import TypeVar
+from os import getenv
 
 
 class SessionAuth(Auth):
-    """ SessionAuth class
     """
+    just inherits from auth
+    """
+
     user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:
@@ -27,7 +30,7 @@ class SessionAuth(Auth):
 
     def user_id_for_session_id(self, session_id: str = None) -> str:
         """
-            session auth
+        Returns a User ID based on a Session ID.
         """
         if session_id is None:
             return None
@@ -35,10 +38,27 @@ class SessionAuth(Auth):
             return None
         return self.user_id_by_session_id.get(session_id)
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request=None):
         """
-            session auth
+        Returns a User instance based on a cookie value.
         """
-        session_cookie = self.session_cookie(request)
-        user_id = self.user_id_for_session_id(session_cookie)
-        return User.get(user_id)
+        cookie_value = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(cookie_value)
+        user = User.get(user_id)
+        return user
+
+    def destroy_session(self, request=None):
+        """
+            destroy the current session,
+            log the user out
+        """
+        if request is None:
+            return False
+        session_id = self.session_cookie(request)
+        if not session_id:
+            return False
+        user_id = self.user_id_for_session_id(session_id)
+        if not user_id:
+            return False
+        del self.user_id_by_session_id[session_id]
+        return True
