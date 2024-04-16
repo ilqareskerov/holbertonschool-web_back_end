@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+'''
+manage the API authentification
+'''
 from flask import request, jsonify, abort
 from typing import List, TypeVar
 
