@@ -5,6 +5,7 @@ import re
 import logging
 from os import environ
 from mysql.connector import connection
+import hashlib
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
@@ -60,14 +61,24 @@ def get_db() -> connection.MySQLConnection:
         database=db_name)
     return connector
 
-    def main() -> None:
-        '''connects to the database and retrieves all rows in the users table'''
-        db = get_db()
-        cursor = db.cursor()
-        cursor.execute("SELECT * FROM users;")
-        fields = [i[0] for i in cursor.description]
-        logger = get_logger()
-        for row in cursor:
-            logger.info("SELECT * FROM users;", extra={fields[i]: row[i] for i in range(len(fields))})
-        cursor.close()
-        db.close()
+
+def hash_password(password: str) -> str:
+    '''returns the SHA256 hash of a password'''
+    return hashlib.sha256(password.encode()).hexdigest()
+
+
+def main() -> None:
+    '''connects to the database and retrieves all rows in the users table'''
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users;")
+    fields = [i[0] for i in cursor.description]
+    logger = get_logger()
+    for row in cursor:
+        logger.info("SELECT * FROM users;", extra={fields[i]: row[i] for i in range(len(fields))})
+    cursor.close()
+    db.close()
+
+
+if __name__ == '__main__':
+    main()
