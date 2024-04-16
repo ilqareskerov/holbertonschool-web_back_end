@@ -46,9 +46,9 @@ class BasicAuth(Auth):
     def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar(User):
         """ def user object from credentials """
-        if type(user_email) != str:
+        if isinstance(user_email, str):
             return None
-        if type(user_pwd) != str:
+        if isinstance(user_pwd, str):
             return None
         if user_email and user_pwd:
             users = User.search({"email": user_email})
