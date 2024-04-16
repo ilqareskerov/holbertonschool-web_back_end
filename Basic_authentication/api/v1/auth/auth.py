@@ -2,7 +2,7 @@
 '''
 manage the API authentification
 '''
-from flask import request, jsonify, abort
+from flask import request
 from typing import List, TypeVar
 
 
@@ -11,12 +11,16 @@ class Auth:
 manage the API authentification
 """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ require_auth
-        """
-        if path is None or excluded_paths is None or excluded_paths == []:
+        ''' require_authentification '''
+        if path is None:
             return True
-        if path[-1] != '/':
-            path += '/'
+        if excluded_paths is None:
+            return True
+        if len(excluded_paths) == 0:
+            return True
+        if path is None or excluded_paths is None:
+            return True
+        path = path + '/' if path[-1] != '/' else path
         if path in excluded_paths:
             return False
         return True
