@@ -10,6 +10,7 @@ class Auth:
     """
 manage the API authentification
 """
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         ''' require_authentification '''
         if path is None:
@@ -36,3 +37,11 @@ manage the API authentification
         """ current_user
         """
         return None
+
+    def session_cookie(self, request=None):
+        """ session_cookie
+        """
+        if request is None:
+            return None
+        session_name = os.getenv("SESSION_NAME")
+        return request.cookies.get(session_name)
