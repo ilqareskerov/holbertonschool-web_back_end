@@ -43,12 +43,16 @@ class BasicAuth(Auth):
             return(mail, password)
         return(None, None)
 
-    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):
-        ''' return the user object '''
-        if user_email and user_pwd and type(user_email) == str and type(user_pwd) == str:
-
-            users = User.search({'email': user_email})
+    def user_object_from_credentials(
+            self, user_email: str, user_pwd: str) -> TypeVar('User'):
+        ''' def user object from credentials '''
+        if type(user_email) != str:
+            return None
+        if type(user_pwd) != str:
+            return None
+        if user_email and user_pwd:
+            users = User.search({"email": user_email})
             for user in users:
-                if user.is_valid_password(user_pwd):
+                if user and user.is_valid_password(user_pwd):
                     return user
         return None
