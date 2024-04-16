@@ -39,9 +39,13 @@ manage the API authentification
         return None
 
     def session_cookie(self, request=None):
-        """ session_cookie
+        """
+            Session cookie Capeesh ?
         """
         if request is None:
             return None
-        session_name = os.getenv("SESSION_NAME")
-        return request.cookies.get(session_name)
+
+        s_name = os.getenv("SESSION_NAME")
+        s_id = request.cookies.get(s_name)
+
+        return s_id
