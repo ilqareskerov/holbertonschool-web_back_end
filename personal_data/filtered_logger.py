@@ -61,9 +61,6 @@ def get_db() -> connection.MySQLConnection:
     return connector
 
 
-
-
-
 def main() -> None:
     '''connects to the database and retrieves all rows in the users table'''
     db = get_db()
