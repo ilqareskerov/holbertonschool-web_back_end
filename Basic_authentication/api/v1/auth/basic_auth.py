@@ -8,9 +8,8 @@ from models.user import User
 
 
 class BasicAuth(Auth):
-    """ BasicAuth class
-    """
-
+    ''' BasicAuth class
+    '''
     def extract_base64_authorization_header(
             self, authorization_header: str) -> str:
         ''' def extract base64 authorization header '''
@@ -40,8 +39,8 @@ class BasicAuth(Auth):
         if c and type(c) == str and ":" in c:
             mail = c.split(':')[0]
             password = "".join(c.split(':', 1)[1:])
-            return (mail, password)
-        return (None, None)
+            return(mail, password)
+        return(None, None)
 
     def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar('User'):
@@ -56,3 +55,12 @@ class BasicAuth(Auth):
                 if user and user.is_valid_password(user_pwd):
                     return user
         return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        ''' complete basic Authentification '''
+        if request:
+            auth_head = self.authorization_header(request)
+            extract = self.extract_base64_authorization_header(auth_head)
+            decode = self.decode_base64_authorization_header(extract)
+            (email, password) = self.extract_user_credentials(decode)
+            return self.user_object_from_credentials(email, password)
