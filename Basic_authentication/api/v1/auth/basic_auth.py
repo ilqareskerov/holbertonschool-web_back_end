@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-'''
-manage the API authentification
+''' Module of Basic_auth
 '''
 from api.v1.auth.auth import Auth
 import base64
@@ -9,7 +8,6 @@ import base64
 class BasicAuth(Auth):
     """ BasicAuth class
     """
-
     def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:
         ''' def extract base64 authorization header '''
         if base64_authorization_header is None or not isinstance(base64_authorization_header, str):
