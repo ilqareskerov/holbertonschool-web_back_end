@@ -5,7 +5,6 @@ import re
 import logging
 from os import environ
 from mysql.connector import connection
-import hashlib
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
@@ -62,9 +61,7 @@ def get_db() -> connection.MySQLConnection:
     return connector
 
 
-def hash_password(password: str) -> str:
-    '''returns the SHA256 hash of a password'''
-    return hashlib.sha256(password.encode()).hexdigest()
+
 
 
 def main() -> None:
