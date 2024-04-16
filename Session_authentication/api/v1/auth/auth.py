@@ -42,6 +42,5 @@ manage the API authentification
         '''self descriptive'''
         if not request:
             return None
-
         session_name = os.getenv("SESSION_NAME")
         return request.cookies.get(session_name)
