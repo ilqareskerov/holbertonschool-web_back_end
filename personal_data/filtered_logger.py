@@ -62,14 +62,20 @@ def get_db() -> connection.MySQLConnection:
 
 
 def main() -> None:
-    '''connects to the database and retrieves all rows in the users table'''
+    '''driver function'''
     db = get_db()
     cursor = db.cursor()
     cursor.execute("SELECT * FROM users;")
-    fields = [i[0] for i in cursor.description]
+
+    headers = [field[0] for field in cursor.description]
     logger = get_logger()
+
     for row in cursor:
-        logger.info("SELECT * FROM users;", extra={fields[i]: row[i] for i in range(len(fields))})
+        info_answer = ''
+        for f, p in zip(row, headers):
+            info_answer += f'{p}={(f)}; '
+        logger.info(info_answer)
+
     cursor.close()
     db.close()
 
