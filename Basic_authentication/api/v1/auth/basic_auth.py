@@ -40,8 +40,8 @@ class BasicAuth(Auth):
         if c and type(c) == str and ":" in c:
             mail = c.split(':')[0]
             password = "".join(c.split(':', 1)[1:])
-            return(mail, password)
-        return(None, None)
+            return (mail, password)
+        return (None, None)
 
     def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar('User'):
