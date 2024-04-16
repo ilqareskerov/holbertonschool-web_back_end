@@ -4,6 +4,8 @@ for now this module do nothing
 """
 from api.v1.auth.auth import Auth
 import uuid
+from models.user import User
+from typing import TypeVar
 
 
 class SessionAuth(Auth):
@@ -32,3 +34,11 @@ class SessionAuth(Auth):
         if type(session_id) is not str:
             return None
         return self.user_id_by_session_id.get(session_id)
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """
+            session auth
+        """
+        session_cookie = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_cookie)
+        return User.get(user_id)
