@@ -14,4 +14,4 @@ def helloWorld():
     """
     Hello world
     """
-    return render_template('0-index.html')
+    return render_template('index.html', title='Welcome to Holberton')
