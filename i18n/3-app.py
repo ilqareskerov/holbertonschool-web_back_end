@@ -1,37 +1,36 @@
 #!/usr/bin/env python3
-"""
-Welcome to Holberton
-"""
-from flask import Flask, render_template, g, request
-from flask_babel import Babel
+''' module to learn i18n
+'''
+from flask import Flask, render_template, request
+from flask_babel import Babel, _
+
+
+class Config():
+    ''' Configuration class
+    '''
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
+    BABEL_DEFAULT_LOCALE = 'en'
+
 
 app = Flask(__name__)
+app.config.from_object(Config)
 babel = Babel(app)
 
 
-class Config(object):
-    """
-    languages config
-    """
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = 'en'
-    BABEL_DEFAULT_TIMEZONE = 'UTC'
+@app.route('/')
+def index():
+    ''' returns index.html file
+    '''
+    return render_template('0-index.html')
 
 
 @babel.localeselector
 def get_locale():
-    """
-    the best match with our supported languages.
-    """
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    ''' using get_locale function
+    '''
+    return request.accept_languages.best_match(Config.LANGUAGES)
 
 
-app.config.from_object(Config)
-
-
-@app.route("/", methods=['GET'])
-def helloWorld():
-    """
-    Hello world
-    """
-    return render_template('3-index.html')
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port="5000")
