@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-""" Basic Flask app """
+"""
+Welcome to Holberton
+"""
 from flask import Flask, render_template
+from flask_babel import Babel
 
 app = Flask(__name__)
+babel = Babel(app)
 
 
-@app.route('/')
-def root():
-    """ basic Flask app """
+@app.route("/", methods=['GET'])
+def helloWorld():
+    """
+    Hello world
+    """
     return render_template('0-index.html')
-
-
-if __name__ == "__main__":
-    app.run()
