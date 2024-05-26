@@ -1,2 +1,2 @@
-// Create or use the database my_db
+// Use or create the database my_db
 use my_db

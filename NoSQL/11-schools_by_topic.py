@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-'''
-Return the list of schools with a specific topic
-'''
+""" 11. Where can I learn Python? """
+
+from pymongo import MongoClient
 
 
 def schools_by_topic(mongo_collection, topic):
-    '''
-    Return the list of schools with a specific topic
-    '''
-    return mongo_collection.find({'topics': topic})
+    """ returns the list of school having a specific topic """
+    return mongo_collection.find({"topics": topic})
