@@ -64,6 +64,3 @@ What you should learn from this project:
 * Import uploadPhoto and createUser from utils.js
 
 ---
-
-## Author
-* **Akeem Seymens** - [akeemseymens](github.com/akeemseymens)
