@@ -1,11 +1,7 @@
-function getListStudentIds(studentArray) {
-    // Check if the argument is an array
-    if (!Array.isArray(studentArray)) {
-      return [];
-    }
-  
-    // Use map to extract ids from each student object
-    return studentArray.map((student) => student.id);
+export default function getListStudentIds(arr) {
+  if (!Array.isArray(arr)) {
+    return [];
   }
-  
-  export default getListStudentIds;
+  return arr.map((el) => el.id);
+}
+
