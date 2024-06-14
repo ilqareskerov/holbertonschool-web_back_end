@@ -1,13 +1,6 @@
-import getListStudents from "./0-get_list_students";
-
-function getListStudentIds () {
-  if (!Array.isArray(students)){
+export default function getListStudentIds(arr) {
+  if (!Array.isArray(arr)) {
     return [];
   }
-
-  const ids = students.map((item) => item.id);
-
-  return ids;
+  return arr.map((el) => el.id);
 }
-
-export default getListStudentIds;
